@@ -19,14 +19,12 @@ class PersonTest < ActiveSupport::TestCase
     assert_match /thumb_original-avatar/, person.avatar.url(:thumb)
   end
 
-  test "replacing an avatar when validation fails" do
+  test "replacing an avatar" do
     person = Person.create!(name: 'Chris')
     person.avatar = Tempfile.new(['original-avatar', '.jpg'])
     person.save!
 
     person.avatar = Tempfile.new(['new-avatar', '.jpg'])
-    person.name = '' # To force validation failure
-    refute person.save
 
     assert_match /new-avatar/, person.avatar_url
     assert_match /new-avatar/, person.avatar.url
