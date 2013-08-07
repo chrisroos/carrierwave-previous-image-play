@@ -14,5 +14,8 @@ class PersonTest < ActiveSupport::TestCase
 
     assert_match /original-avatar/, person.avatar_url
     assert_match /original-avatar/, person.avatar.url
+
+    assert_match /thumb_original-avatar/, person.avatar_url(:thumb)
+    assert_match /thumb_original-avatar/, person.avatar.url(:thumb)
   end
 end
